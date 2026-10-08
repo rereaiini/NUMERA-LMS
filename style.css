@@ -1,0 +1,86 @@
+:root {
+    --blue: #2563eb;
+    --blue-hover: #1d4ed8;
+    --blue-light: #eff6ff;
+    --pink: #ec4899;
+    --pink-hover: #be185d;
+    --pink-light: #fdf2f8;
+    --bg: #f8fafc;
+    --text-main: #334155;
+    --text-muted: #64748b;
+    --white: #ffffff;
+    --radius: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background-color: var(--bg); color: var(--text-main); }
+
+/* Utility Classes */
+.text-blue { color: var(--blue); }
+.text-pink { color: var(--pink); }
+.bg-blue { background-color: var(--blue); }
+.bg-blue-light { background-color: var(--blue-light); }
+.border-blue { border-top: 4px solid var(--blue); }
+.border-pink { border-top: 4px solid var(--pink); }
+.hidden { display: none !important; }
+.mt-4 { margin-top: 1.5rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+
+/* Navbar */
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; background: var(--white); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+.logo { font-size: 1.8rem; font-weight: 700; letter-spacing: -1px; }
+
+/* Buttons */
+.btn { padding: 10px 24px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 14px; }
+.btn-primary { background: var(--blue); color: var(--white); }
+.btn-primary:hover { background: var(--blue-hover); transform: translateY(-2px); }
+.btn-pink { background: var(--pink); color: var(--white); }
+.btn-pink:hover { background: var(--pink-hover); transform: translateY(-2px); }
+.btn-outline { background: transparent; border: 2px solid var(--blue); color: var(--blue); }
+.btn-outline:hover { background: var(--blue-light); }
+.btn-large { padding: 15px 30px; font-size: 16px; }
+.btn-full { width: 100%; }
+
+/* Layout & Views */
+#app-container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+.view { display: none; animation: fadeIn 0.4s ease; }
+.view.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Cards */
+.card { background: var(--white); padding: 24px; border-radius: var(--radius); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+
+/* Landing */
+.hero { text-align: center; padding: 4rem 1rem; }
+.hero h1 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-main); }
+.hero p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.1rem; }
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+
+/* Login */
+.login-box { max-width: 400px; margin: 0 auto; }
+.input-group { margin-bottom: 1.5rem; }
+.input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 14px; }
+.input-group input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; transition: 0.2s; }
+.input-group input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-light); }
+.error-text { color: var(--pink); font-size: 13px; margin-top: 10px; text-align: center; }
+.hint { text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 15px; }
+
+/* Dashboard & Stats */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; margin-bottom: 2rem; }
+.progress-bg { background: #e2e8f0; height: 12px; border-radius: 10px; margin: 10px 0; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 10px; transition: width 0.5s ease; }
+.action-buttons { display: flex; gap: 1rem; }
+
+/* Materi Grid */
+.materi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+.video-placeholder { width: 100%; height: 300px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--blue); font-weight: bold; margin: 1rem 0; }
+.materi-actions { display: flex; gap: 1rem; }
+
+/* Kuis Options */
+.kuis-opsi { display: block; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
+.kuis-opsi:hover { border-color: var(--blue); background: var(--blue-light); }
+
+/* Table */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th, .data-table td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+.data-table th { color: var(--text-muted); font-weight: 600; }

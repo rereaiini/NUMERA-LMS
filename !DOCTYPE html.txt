@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numera - Platform Pembelajaran</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js untuk Grafik -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <span class="text-blue">nu</span><span class="text-pink">mera</span>
+        </div>
+        <div class="nav-links">
+            <button class="btn btn-outline hidden" id="nav-dashboard" onclick="navigate('dashboard')">Dashboard</button>
+            <button class="btn btn-primary" id="nav-login" onclick="navigate('login')">Login</button>
+            <button class="btn btn-pink hidden" id="nav-logout" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div id="app-container">
+
+        <!-- 1. LANDING PAGE -->
+        <section id="landing" class="view active">
+            <div class="hero">
+                <h1>Belajar Angka & Akuntansi di <span class="text-pink">Numera</span></h1>
+                <p>Platform pembelajaran interaktif yang membuat materi rumit menjadi sangat mudah dipahami.</p>
+                <button class="btn btn-primary btn-large" onclick="navigate('login')">Mulai Sekarang</button>
+            </div>
+            <div class="features">
+                <div class="card">
+                    <h3 class="text-blue">📊 Materi Interaktif</h3>
+                    <p>Modul terstruktur dari dasar hingga mahir.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-pink">🎯 Kuis Cerdas</h3>
+                    <p>Evaluasi pemahamanmu secara langsung.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-blue">📈 Pantau Progress</h3>
+                    <p>Lihat grafik perkembangan belajarmu.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. LOGIN PAGE -->
+        <section id="login" class="view">
+            <div class="login-box card">
+                <h2 class="text-blue">Masuk ke Numera</h2>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="siswa@numera.com">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="123">
+                </div>
+                <button class="btn btn-primary btn-full" onclick="login()">Masuk</button>
+                <p id="login-error" class="error-text"></p>
+                <p class="hint">Demo: email <b>siswa@numera.com</b> | pass <b>123</b></p>
+            </div>
+        </section>
+
+        <!-- 3. DASHBOARD -->
+        <section id="dashboard" class="view">
+            <h2>Halo, <span id="user-name" class="text-pink">Siswa</span>! 👋</h2>
+            
+            <div class="stats-grid">
+                <div class="card stat-card border-blue">
+                    <h3>Progress</h3>
+                    <div class="progress-bg">
+                        <div class="progress-fill bg-blue" id="dash-progress" style="width: 0%;"></div>
+                    </div>
+                    <p id="dash-progress-text">0% Selesai</p>
+                </div>
+                <div class="card stat-card border-pink">
+                    <h3>Rata-rata Nilai</h3>
+                    <h1 class="text-pink" id="dash-nilai">0</h1>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="navigate('materi-list')">📖 Buka Materi</button>
+                <button class="btn btn-outline" onclick="navigate('rapor')">📈 Lihat Rapor</button>
+            </div>
+        </section>
+
+        <!-- 4. DAFTAR MATERI -->
+        <section id="materi-list" class="view">
+            <button class="btn btn-outline mb-4" onclick="navigate('dashboard')">← Kembali</button>
+            <h2>Daftar Modul</h2>
+            <div class="materi-grid" id="materi-container">
+                <!-- Diisi oleh JavaScript -->
+            </div>
+        </section>
+
+        <!-- 5. DETAIL MATERI -->
+        <section id="materi-detail" class="view">
+            <button class="btn btn-outline mb-4" onclick="navigate('materi-list')">← Daftar Materi</button>
+            <div class="card">
+                <h2 id="detail-judul" class="text-blue">Judul</h2>
+                <div class="video-placeholder bg-blue-light" id="detail-video">
+                    [ Area Video Pembelajaran ]
+                </div>
+                <div id="detail-konten" class="konten-materi">
+                    <p>Konten materi akan muncul di sini.</p>
+                </div>
+                <div class="materi-actions mt-4">
+                    <button class="btn btn-pink" onclick="tandaiSelesai()">✔ Tandai Selesai</button>
+                    <button class="btn btn-primary" onclick="mulaiKuis()">📝 Kerjakan Kuis</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. KUIS -->
+        <section id="kuis" class="view">
+            <div class="card">
+                <div class="kuis-header">
+                    <h3 class="text-pink">Kuis: <span id="kuis-judul">Judul</span></h3>
+                </div>
+                <div id="kuis-pertanyaan" class="mt-4">
+                    <!-- Soal dirender JS -->
+                </div>
+                <button class="btn btn-primary mt-4" onclick="submitKuis()">Kumpulkan Jawaban</button>
+            </div>
+        </section>
+
+        <!-- 7. RAPOR / NILAI -->
+        <section id="rapor" class="view">
+            <button class="btn btn-outline mb-4" onclick="navigate('dashboard')">← Dashboard</button>
+            <h2>Grafik & Laporan Nilai</h2>
+            <div class="card">
+                <canvas id="nilaiChart" height="100"></canvas>
+            </div>
+            <div class="card mt-4">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Modul</th>
+                            <th>Nilai Kuis</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabel-nilai">
+                        <!-- Diisi JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
